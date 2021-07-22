@@ -17,9 +17,12 @@ pipeline {
                     image 'qnib/pytest'
                 }
             }
+            step {
+                sh 'pip install allure-pytest'
+            }
             steps {
 //                 sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-                sh 'pytest sources/test_calc.py'
+                sh 'pytest sources/test_calc.py --alluredir=./my_allure_results'
             }
             post {
                 always {
@@ -52,7 +55,7 @@ pipeline {
                                 jdk: '',
                                 properties: [],
                                 reportBuildPolicy: 'ALWAYS',
-                                results: [[path: 'target/allure-results']]
+                                results: [[path: './my_allure_results']]
                         ])
                     }
                 
