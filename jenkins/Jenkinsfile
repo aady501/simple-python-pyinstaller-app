@@ -19,7 +19,7 @@ pipeline {
             }
             steps {
 //                 sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-                sh 'py pip install allure-pytest'
+                sh 'sudo -H pip install allure-pytest'
                 sh 'pytest sources/test_calc.py --alluredir=./my_allure_results'
             }
             post {
