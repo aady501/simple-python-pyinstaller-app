@@ -14,7 +14,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'qnib/pytest'
+                    image 'python:3.8'
                 }
             }
             steps {
@@ -22,7 +22,8 @@ pipeline {
                 sh '''
                     python -m venv .venv
                     . .venv/bin/activate
-                    ip install allure-pytest
+                    pip install pytest
+                    pip install allure-pytest
                     pytest sources/test_calc.py --alluredir=./my_allure_results
                 '''
 //                 sh 'sudo -H pip install allure-pytest'
