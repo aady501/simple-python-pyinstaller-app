@@ -55,6 +55,8 @@ pipeline {
     }
     post { 
         always { 
+            
+            steps{
                 unstash app
                 script {
                         allure([
@@ -65,7 +67,7 @@ pipeline {
                                 results: [[path: './my_allure_results']]
                         ])
                     }
-                
+            }
         }
     }
 }
