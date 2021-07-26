@@ -55,18 +55,19 @@ pipeline {
     }
     post { 
         always { 
-            
-            steps{
-                unstash app
-                script {
-                        allure([
-                                includeProperties: false,
-                                jdk: '',
-                                properties: [],
-                                reportBuildPolicy: 'ALWAYS',
-                                results: [[path: './my_allure_results']]
-                        ])
-                    }
+            stage('report'){
+                steps{
+                    unstash app
+                    script {
+                            allure([
+                                    includeProperties: false,
+                                    jdk: '',
+                                    properties: [],
+                                    reportBuildPolicy: 'ALWAYS',
+                                    results: [[path: './my_allure_results']]
+                            ])
+                        }
+                }
             }
         }
     }
