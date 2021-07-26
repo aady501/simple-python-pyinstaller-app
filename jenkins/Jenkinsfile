@@ -29,11 +29,11 @@ pipeline {
 //                 sh 'sudo -H pip install allure-pytest'
 //                 sh 'pytest sources/test_calc.py --alluredir=./my_allure_results'
             }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
-                }
-            }
+//             post {
+//                 always {
+//                     junit 'test-reports/results.xml'
+//                 }
+//             }
         }
 //         stage('Deliver') {
 //             agent {
