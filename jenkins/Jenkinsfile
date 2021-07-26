@@ -1,12 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:2-alpine'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
-            
+            agent {
+                docker {
+                    image 'python:2-alpine'
+                }
+            }
+
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
@@ -26,6 +27,7 @@ pipeline {
                     pip install allure-pytest
                     pytest sources/test_calc.py --alluredir=./my_allure_results
                 '''
+                stash includes: 'my_allure_results/*.json', name: 'app'
 //                 sh 'sudo -H pip install allure-pytest'
 //                 sh 'pytest sources/test_calc.py --alluredir=./my_allure_results'
             }
@@ -53,7 +55,7 @@ pipeline {
     }
     post { 
         always { 
-            
+                unstash app
                 script {
                         allure([
                                 includeProperties: false,
