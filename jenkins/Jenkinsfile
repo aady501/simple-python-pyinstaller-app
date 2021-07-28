@@ -27,15 +27,15 @@ pipeline {
                     pip install allure-pytest
                     pytest sources/test_calc.py --alluredir=./my_allure_results
                 '''
-                stash includes: 'my_allure_results/*.json', name: 'app'
+                
 //                 sh 'sudo -H pip install allure-pytest'
 //                 sh 'pytest sources/test_calc.py --alluredir=./my_allure_results'
             }
-//             post {
-//                 always {
-//                     junit 'test-reports/results.xml'
-//                 }
-//             }
+            post {
+                always {
+                    stash includes: 'my_allure_results/*.json', name: 'app'
+                }
+            }
         }
 //         stage('Deliver') {
 //             agent {
