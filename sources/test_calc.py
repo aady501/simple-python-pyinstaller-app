@@ -43,6 +43,14 @@ class TestCalc(unittest.TestCase):
         """
         result = calc.add2('abc', '5.5')
         self.assertEqual(result, 'abc5.5')
+     
+    def test_always_fail(self):
+        """
+        Test the addition of a string and a float returns them as one
+        concatenated string (in which the float is converted to a string)
+        """
+#         result = calc.add2('abc', '5.5')
+        self.assertEqual('a', 'abc5.5')
 
 if __name__ == '__main__':
     unittest.main()
