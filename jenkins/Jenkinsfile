@@ -23,6 +23,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
+                    stash includes: 'test-reports/results.xml', name: 'app'
                 }
             }
         }
@@ -44,14 +45,14 @@ pipeline {
     }
     post { 
         always { 
-            
+                unstash 'app'
                 script {
                         allure([
                                 includeProperties: false,
                                 jdk: '',
                                 properties: [],
                                 reportBuildPolicy: 'ALWAYS',
-                                results: [[path: 'test-results']]
+                                results: [[path: 'test-reports']]
                         ])
                     }
                 
